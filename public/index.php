@@ -15,7 +15,9 @@
   // Selvitetään mitä sivua on kutsuttu ja suoritetaan sivua vastaava
   // käsittelijä.
   if ($request === '/' || $request === '/tapahtumat') {
-    echo $templates->render('tapahtumat');
+    require_once MODEL_DIR . 'tapahtuma.php';
+    $tapahtumat = haeTapahtumat();
+    echo $templates->render('tapahtumat',['tapahtumat' => $tapahtumat]);
   } else if ($request === '/tapahtuma') {
     echo $templates->render('tapahtuma');
   } else {
