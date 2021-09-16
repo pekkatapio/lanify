@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Rubik', sans-serif;
+  background: rgb(0,34,0);
+  background: linear-gradient(120deg, rgba(0,34,0,1) 0%, rgba(9,136,144,1) 36%, rgba(151,85,121,1) 100%);
+}
+
+body {
+  background-color: #fff;
+  min-height: 100vh;
+  max-width: 40rem;
+  margin: 0 auto;
+  box-shadow: 0px 0px 25px rgba(0,0,0,0.5);
+}
+
+header {
+  background-color: #B8BAC8;
+  padding: 1rem 1.5rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: normal;
+  margin-left: 0.5rem;
+}
+
+header a {
+  color: #000;
+  text-decoration: none;
+}
+
+section {
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+
+section h1 {
+  margin-bottom: 1rem;
+}
+
+hr {
+  border: none;
+  border-top: solid #1B1B3A 2px;
+  margin: 1rem;
+}
+
+footer {
+  font-size: 0.8rem;
+  text-align: center;
+  color: #1B1B3A;
+}
+
+.tapahtumat > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tapahtumat > div > div:nth-child(3) {
+  text-align: right;
+}
