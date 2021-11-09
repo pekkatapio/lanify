@@ -35,9 +35,17 @@
       break;
     case '/tapahtuma':
       require_once MODEL_DIR . 'tapahtuma.php';
+      require_once MODEL_DIR . 'ilmoittautuminen.php';
       $tapahtuma = haeTapahtuma($_GET['id']);
       if ($tapahtuma) {
-        echo $templates->render('tapahtuma',['tapahtuma' => $tapahtuma]);
+        if ($loggeduser) {
+          $ilmoittautuminen = haeIlmoittautuminen($loggeduser['idhenkilo'],$tapahtuma['idtapahtuma']);
+        } else {
+          $ilmoittautuminen = NULL;
+        }
+        echo $templates->render('tapahtuma',['tapahtuma' => $tapahtuma,
+                                             'ilmoittautuminen' => $ilmoittautuminen,
+                                             'loggeduser' => $loggeduser]);
       } else {
         echo $templates->render('tapahtumanotfound');
       }
