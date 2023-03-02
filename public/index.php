@@ -183,7 +183,19 @@
       $formdata = cleanArrayData($_POST);
       if (isset($formdata['laheta'])) {
 
-        // TODO Salasanalomakkeen käsittelijä
+        // Lomakkeelle on syötetty uudet salasanat, annetaan syötteen
+        // käsittely kontrollerille.
+        require_once CONTROLLER_DIR . 'tili.php';
+        $tulos = resetoiSalasana($formdata,$resetkey);
+        // Tarkistetaan kontrollerin tekemän salasanaresetoinnin lopputulos.
+        if ($tulos['status'] == "200") {
+          // Salasana vaihdettu, tulostetaan ilmoitus.
+          echo $templates->render('reset_valmis');
+          break;
+        }
+        // Salasanan vaihto ei onnistunut, tulostetaan lomake virhetekstin kanssa.
+        echo $templates->render('reset_lomake', ['error' => $tulos['error']]);
+        break;
 
       } else {
         // Lomakkeen tietoja ei ole vielä täytetty, tulostetaan lomake.
