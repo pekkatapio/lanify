@@ -158,6 +158,40 @@
         echo $templates->render('tilaa_vaihtoavain_lomake');
       }
       break;
+    case "/reset":
+      // Otetaan vaihtoavain talteen.
+      $resetkey = $_GET['key'];
+
+      // Seuraavat tarkistukset tarkistavat, että onko vaihtoavain
+      // olemassa ja se on vielä aktiivinen. Jos ei, niin tulostetaan
+      // käyttäjälle virheilmoitus ja poistutaan.
+      require_once MODEL_DIR . 'henkilo.php';
+      $rivi = tarkistaVaihtoavain($resetkey);
+      if ($rivi) {
+        // Vaihtoavain löytyi, tarkistetaan onko se vanhentunut.
+        if ($rivi['aikaikkuna'] < 0) {
+          echo $templates->render('reset_virhe');
+          break;
+        }
+      } else {
+        echo $templates->render('reset_virhe');
+        break;
+      }
+
+      // Vaihtoavain on voimassa, tarkistetaan onko lomakkeen kautta
+      // syötetty tietoa.
+      $formdata = cleanArrayData($_POST);
+      if (isset($formdata['laheta'])) {
+
+        // TODO Salasanalomakkeen käsittelijä
+
+      } else {
+        // Lomakkeen tietoja ei ole vielä täytetty, tulostetaan lomake.
+        echo $templates->render('reset_lomake', ['error' => '']);
+        break;
+      }
+
+      break;
     default:
       echo $templates->render('notfound');
   }
